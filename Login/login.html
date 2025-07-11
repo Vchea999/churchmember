@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login with Slideshow</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons (e.g., password toggle, social media) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles for the slideshow and overall layout */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Hide scrollbars */
+        }
+
+        .slideshow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Send to back */
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Overlay for better readability of login form */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+            z-index: 0;
+        }
+
+        .login-wrapper {
+            position: relative;
+            z-index: 1; /* Bring login form to front */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-form-container {
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #9ca3af; /* Gray-400 */
+        }
+
+        .password-toggle:hover {
+            color: #6b7280; /* Gray-500 */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .login-form-container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Slideshow Container -->
+    <div class="slideshow-container">
+         <div class="slide active" style="background-image: url('1.jpg');"></div>
+         <div class="slide" style="background-image: url('2.jpg');"></div>
+         <div class="slide" style="background-image: url('3.jpg');"></div>
+    </div>
+
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Login Form Wrapper -->
+    <div class="login-wrapper">
+        <div class="login-form-container">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Welcome Church Member!</h2>
+            <p class="text-gray-600 mb-8">Sign in to manage your church community.</p>
+
+            <form action="#" method="POST" class="space-y-6">
+                <div class="input-group">
+                    <label for="email" class="sr-only">Email address</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required
+                           class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                           placeholder="Email address">
+                </div>
+                <div class="input-group">
+                    <label for="password" class="sr-only">Password</label>
+                    <input id="password" name="password" type="password" autocomplete="current-password" required
+                           class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                           placeholder="Password">
+                    <span class="password-toggle" onclick="togglePasswordVisibility()">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox"
+                               class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+                            Forgot your password?
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Sign in
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-6 text-center text-sm text-gray-600">
+                Not a member?
+                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+                    Sign up
+                </a>
+            </div>
+
+            <div class="mt-8">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slideshow-container .slide');
+
+        function showSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+            });
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            slides[slideIndex - 1].classList.add('active');
+            setTimeout(showSlides, 5000); // Change image every 5 seconds
+        }
+
+        // Function to toggle password visibility
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            const passwordToggleIcon = document.querySelector('.password-toggle i');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                passwordToggleIcon.classList.remove('fa-eye');
+                passwordToggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                passwordToggleIcon.classList.remove('fa-eye-slash');
+                passwordToggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Start the slideshow when the window loads
+        window.onload = function() {
+            showSlides();
+        };
+    </script>
+</body>
+</html>
